@@ -24,7 +24,6 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
   private final Map<String, String> headerMap = new HashMap<>();
 
   public static void copy(InputStream in, OutputStream out) throws IOException {
-
     byte[] buffer = new byte[1024];
     while (true) {
       int bytesRead = in.read(buffer);
