@@ -54,7 +54,7 @@ public class ProxyServer implements Closeable {
       String keystorePass = config.getKeystorePass();
       File keystoreFile = new File(keystorePath);
 
-      SslContextFactory sslContextFactory = new SslContextFactory();
+      SslContextFactory sslContextFactory = new SslContextFactory.Client();
       sslContextFactory.setTrustAll(true);
       sslContextFactory.setStopTimeout(TimeUnit.SECONDS.toMillis(15));
       sslContextFactory.setSslSessionTimeout((int) TimeUnit.SECONDS.toMillis(15));

@@ -18,9 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class RequestFilter implements Filter {
-  private FilterConfig filterConfig = null;
+  private FilterConfig filterConfig;
 
-  public void init(FilterConfig filterConfig) throws ServletException {
+  public void init(FilterConfig filterConfig) {
     this.filterConfig = filterConfig;
   }
 

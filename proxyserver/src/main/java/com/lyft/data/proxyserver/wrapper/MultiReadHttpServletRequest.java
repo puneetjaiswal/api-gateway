@@ -82,7 +82,7 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
   }
 
   @Override
-  public ServletInputStream getInputStream() throws IOException {
+  public ServletInputStream getInputStream() {
     final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(content);
     return new ServletInputStream() {
       @Override
@@ -98,14 +98,14 @@ public class MultiReadHttpServletRequest extends HttpServletRequestWrapper {
       @Override
       public void setReadListener(ReadListener readListener) {}
 
-      public int read() throws IOException {
+      public int read() {
         return byteArrayInputStream.read();
       }
     };
   }
 
   @Override
-  public BufferedReader getReader() throws IOException {
+  public BufferedReader getReader() {
     return new BufferedReader(new InputStreamReader(this.getInputStream()));
   }
 }
