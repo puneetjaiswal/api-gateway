@@ -7,7 +7,7 @@ public class RequestRouterConfiguration {
   // Local gateway port
   private int port;
 
-  // Name of the routing gateway name (for metrics purposes)
+  // Name of the routing gateway (for metrics purposes)
   private String name;
 
   // Use SSL?

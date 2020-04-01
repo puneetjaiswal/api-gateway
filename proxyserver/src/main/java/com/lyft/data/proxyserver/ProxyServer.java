@@ -116,13 +116,16 @@ public class ProxyServer implements Closeable {
   }
 
   public void start() {
-
     try {
       this.server.start();
     } catch (Exception e) {
       log.error("Error starting proxy server", e);
       throw new IllegalStateException(e);
     }
+  }
+
+  public void stop() {
+    close();
   }
 
   @Override
