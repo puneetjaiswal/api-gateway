@@ -32,7 +32,7 @@ public class HaGatewayProviderModule extends AppModule<HaGatewayConfiguration, E
     gatewayBackendManager = new HaGatewayManager(connectionManager);
     queryHistoryManager = new HaQueryHistoryManager(connectionManager);
     routingManager =
-        new HaRoutingManager(gatewayBackendManager, (HaQueryHistoryManager) queryHistoryManager);
+        new HaRoutingManager(gatewayBackendManager, queryHistoryManager);
   }
 
   protected ProxyHandler getProxyHandler() {

@@ -11,6 +11,7 @@ import com.lyft.data.proxyserver.wrapper.MultiReadHttpServletRequest;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -92,7 +93,7 @@ public class QueryIdCachingProxyHandler extends ProxyHandler {
   }
 
   @Override
-  public String rewriteTarget(HttpServletRequest request) {
+  public Optional<String> rewriteTarget(HttpServletRequest request) {
     /* Here comes the load balancer / gateway */
     String backendAddress = "http://localhost:" + serverApplicationPort;
 
@@ -119,7 +120,7 @@ public class QueryIdCachingProxyHandler extends ProxyHandler {
       if (!handleAuthRequest(request)) {
         // This implies the AuthRequest was not authenticated, hence we error out from here.
         log.info("Could not authenticate Request: " + request.toString());
-        return null;
+        return Optional.empty();
       }
     }
     String targetLocation =
@@ -137,7 +138,7 @@ public class QueryIdCachingProxyHandler extends ProxyHandler {
             + (request.getQueryString() != null ? "?" + request.getQueryString() : "");
 
     log.info("Rerouting [{}]--> [{}]", originalLocation, targetLocation);
-    return targetLocation;
+    return Optional.of(targetLocation);
   }
 
   protected String extractQueryIdIfPresent(HttpServletRequest request) {

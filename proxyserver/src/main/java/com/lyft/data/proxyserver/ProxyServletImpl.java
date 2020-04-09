@@ -1,5 +1,6 @@
 package com.lyft.data.proxyserver;
 
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,15 +50,14 @@ public class ProxyServletImpl extends ProxyServlet.Transparent {
 
   @Override
   protected String rewriteTarget(HttpServletRequest request) {
-    String target = null;
     if (proxyHandler != null) {
-      target = proxyHandler.rewriteTarget(request);
+      Optional<String>  target = proxyHandler.rewriteTarget(request);
+      if (target.isPresent()) {
+        log.debug("Target : " + target);
+        return target.get();
+      }
     }
-    if (target == null) {
-      target = super.rewriteTarget(request);
-    }
-    log.debug("Target : " + target);
-    return target;
+    return super.rewriteTarget(request);
   }
 
   /**

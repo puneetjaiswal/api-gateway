@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Optional;
 import java.util.zip.GZIPInputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +23,9 @@ import org.eclipse.jetty.util.Callback;
 @Slf4j
 public class ProxyHandler {
 
-  protected String rewriteTarget(HttpServletRequest request) {
+  protected Optional<String> rewriteTarget(HttpServletRequest request) {
     // Dont override this unless absolutely needed.
-    return null;
+    return Optional.empty();
   }
 
   /**

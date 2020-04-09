@@ -31,11 +31,17 @@ public class ProxyServer implements Closeable {
   private ServletContextHandler context;
 
   public ProxyServer(ProxyServerConfiguration config, ProxyHandler proxyHandler) {
+    this(config, proxyHandler, RequestFilter.class);
+  }
+
+  public ProxyServer(ProxyServerConfiguration config, ProxyHandler proxyHandler,
+                     Class<? extends Filter> servletFilter) {
     validateArgs(config);
     this.server = new Server();
     this.server.setStopAtShutdown(true);
     this.proxyHandler = proxyHandler;
     this.setupContext(config);
+    addFilter(servletFilter, "/*");
   }
 
   private void validateArgs(ProxyServerConfiguration configuration) {
@@ -108,7 +114,6 @@ public class ProxyServer implements Closeable {
     this.context =
         new ServletContextHandler(proxyConnectHandler, "/", ServletContextHandler.SESSIONS);
     this.context.addServlet(proxyServlet, "/*");
-    this.context.addFilter(RequestFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
   }
 
   public void addFilter(Class<? extends Filter> filterClass, String pathSpec) {
