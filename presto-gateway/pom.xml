@@ -12,9 +12,9 @@
         <relativePath>../</relativePath>
     </parent>
 
-    <artifactId>gateway-ha</artifactId>
+    <artifactId>presto-gateway</artifactId>
     <packaging>jar</packaging>
-    <name>gateway-ha</name>
+    <name>presto-gateway</name>
 
     <properties>
         <guice.version>4.1.0</guice.version>

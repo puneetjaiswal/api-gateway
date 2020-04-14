@@ -115,7 +115,7 @@
     <modules>
         <module>baseapp</module>
         <module>proxyserver</module>
-        <module>gateway-ha</module>
+        <module>presto-gateway</module>
     </modules>
 
     <build>
